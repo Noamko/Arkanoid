@@ -17,4 +17,6 @@ public class Config {
     public static final Point BALL_STARTING_POSITION = new Point(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
     public static final Point BALL_2NDSTARTING_POSITION = new Point(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 3);
     public static final int COLLISION_ERROR  = 1;
+    public static final int SCORE_INDICATOR_HEIGHT = 20;
+    public static final int SCORE_INDICATOR_WIDTH = WINDOW_WIDTH;
 }

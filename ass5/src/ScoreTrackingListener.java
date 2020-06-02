@@ -1,4 +1,11 @@
-package PACKAGE_NAME;
+public class ScoreTrackingListener implements HitListener {
+    private Counter currentScore;
 
-public class ScoreTrackingListener {
+    public ScoreTrackingListener(Counter c) {
+        this.currentScore = c;
+    }
+    @Override
+    public void hitEvent(Block beingHit, Ball hitter) {
+        currentScore.increase(5);
+    }
 }

@@ -14,7 +14,6 @@ public class Block implements Collidable, Sprite, HitNotifier {
     private Color color;
     private Rectangle rect;
 
-
     /**
      * Block constructor.
      * @param position (Point)
@@ -51,7 +50,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
      */
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity, Collidable collidable) {
         Random random = new Random();
-        double angleBias = random.nextInt(10);
+        double angleBias = random.nextInt(20);
         rect = collidable.getCollisionRectangle();
         Line[] lines = rect.getRectLines();
         double currentAngle = currentVelocity.getAngle();
@@ -85,7 +84,8 @@ public class Block implements Collidable, Sprite, HitNotifier {
      * @param currentVelocity (Velocity)
      * @return Velocity
      */
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
+        this.notifyHit(hitter);
         return null;
     }
 
@@ -98,9 +98,10 @@ public class Block implements Collidable, Sprite, HitNotifier {
         game.addCollidable(this);
     }
 
-//    public void removeFromGame(Game game) {
-//
-//    }
+    public void removeFromGame(Game game){
+        game.removeSprite(this);
+        game.removeCollidable(this);
+    }
 
     /**
      * Draw the Block on a given drawSurface object.
@@ -143,6 +144,6 @@ public class Block implements Collidable, Sprite, HitNotifier {
     }
 
     public void removeHitListener(HitListener hl) {
-
+        this.hitListeners.remove(hl);
     }
 }

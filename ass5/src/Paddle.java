@@ -8,7 +8,7 @@ import java.awt.Color;
 public class Paddle implements Collidable, Sprite {
     private static final Point STARTING_POSITION = new Point(
             Config.WINDOW_WIDTH / 2 - Config.PADDLE_WIDTH / 2,
-            Config.WINDOW_HEIGHT - Config.PADDLE_HEIGHT * 2 - 10);
+            Config.WINDOW_HEIGHT - Config.PADDLE_HEIGHT);
     private Block blockPaddle;
     private Velocity velocity;
     private biuoop.KeyboardSensor keyboard;
@@ -92,7 +92,7 @@ public class Paddle implements Collidable, Sprite {
      * @param currentVelocity (Velocity)
      * @return Velocity
      */
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
         int[] angles = {300, 330, 0, 30, 60};
         for (int i  = 1; i <= 5; i++) {
             if (collisionPoint.distance(

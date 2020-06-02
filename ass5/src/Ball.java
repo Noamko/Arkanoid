@@ -161,6 +161,11 @@ public class Ball implements Sprite {
 //        game.addSprite(this.trajectory);
     }
 
+    public void removeFromGame(Game game){
+        game.removeSprite(this);
+        this.velocity = Velocity.fromAngleAndSpeed(0,0);
+    }
+
     /**
      * Move the ball one step according to its velocity.
      */
@@ -174,12 +179,15 @@ public class Ball implements Sprite {
             //Collision detected
             if (collisionInfo.error() == Config.COLLISION_ERROR) {
 //                System.out.println("COLLISION_ERROR");
+
+                collisionInfo.collisionObject().hit(this, collisionInfo.collisionPoint(), this.velocity);
+
                 velocity = Velocity.fromAngleAndSpeed(
                         this.velocity.getAngle() + 180 + random.nextInt(45), velocity.getSpeed());
                 this.center = velocity.applyToPoint(this.center);
             } else if (nextPos.distance(collisionInfo.collisionPoint()) <= this.radius + this.velocity.getSpeed()) {
                 if (collisionInfo.collisionObject().getClass() == Paddle.class) {
-                    this.setVelocity(collisionInfo.collisionObject().hit(
+                    this.setVelocity(collisionInfo.collisionObject().hit(this,
                             collisionInfo.collisionPoint(), this.velocity));
                 } else {
                     this.setVelocity(collisionInfo.collisionObject().hit(this,
