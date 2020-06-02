@@ -2,21 +2,64 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7649f95-99c9-4911-865c-a0919bbedb2c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometry/Line.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometry/Point.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometry/Rectangle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/objects/Ball.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/objects/Block.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/objects/Paddle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BallRemover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BallRemover.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Block.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BlockRemover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BlockRemover.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Collidable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Collidable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Counter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Counter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HitListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HitNotifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HitNotifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Paddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Paddle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PrintingHitListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ScoreIndicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScoreIndicator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ScoreTrackingListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScoreTrackingListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SpriteCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SpriteCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Ass5Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Ball.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/BallRemover.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Block.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/BlockRemover.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Collidable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/CollisionInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Config.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Counter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/GameEnvironment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/HitListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/HitNotifier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Levels.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Line.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Paddle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Point.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/PrintingHitListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Rectangle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/ScoreIndicator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/ScoreTrackingListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Sprite.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/SpriteCollection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Trajectory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ass5/Velocity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ass5Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gamelogic/Ass5Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ball.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BallRemover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scoresystem/BallRemover.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Block.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BlockRemover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scoresystem/BlockRemover.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Collidable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/collision/Collidable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CollisionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/collision/CollisionInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/configuration/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Counter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scoresystem/Counter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gamelogic/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameEnvironment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gamelogic/GameEnvironment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/collision/HitListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HitNotifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/collision/HitNotifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Levels.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Line.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Paddle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Point.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rectangle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ScoreIndicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scoresystem/ScoreIndicator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ScoreTrackingListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scoresystem/ScoreTrackingListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Sprite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SpriteCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/SpriteCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Trajectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vector/Trajectory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Velocity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vector/Velocity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,12 +78,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1cYSLNFrjTwUxGnAYnPBtinsoKP" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -51,7 +97,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Ass5Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Ass5Game" />
+      <option name="MAIN_CLASS_NAME" value="gamelogic.Ass5Game" />
       <module name="ass5" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -76,6 +122,9 @@
     </task>
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="103" y="0" key="#Project_Structure" timestamp="1591089892964">
       <screen x="0" y="0" width="1500" height="960" />
@@ -94,6 +143,10 @@
       <screen x="0" y="0" width="1500" height="957" />
     </state>
     <state x="485" y="270" width="525" height="431" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1500.957@0.0.1500.957" timestamp="1591053935323" />
+    <state x="474" y="351" width="550" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1591127196543">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="474" y="351" width="550" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1500.960@0.0.1500.960" timestamp="1591127196543" />
     <state x="259" y="0" key="CommitChangelistDialog2" timestamp="1591114616361">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
@@ -102,46 +155,46 @@
       <screen x="0" y="0" width="1500" height="957" />
     </state>
     <state x="376" y="235" width="739" height="516" key="FileChooserDialogImpl/0.0.1500.957@0.0.1500.957" timestamp="1590922327188" />
-    <state width="1446" height="326" key="GridCell.Tab.0.bottom" timestamp="1591115171392">
+    <state width="1446" height="326" key="GridCell.Tab.0.bottom" timestamp="1591128306002">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1454" height="245" key="GridCell.Tab.0.bottom/0.0.1500.957@0.0.1500.957" timestamp="1591089379887" />
-    <state width="1446" height="326" key="GridCell.Tab.0.bottom/0.0.1500.960@0.0.1500.960" timestamp="1591115171392" />
-    <state width="1446" height="326" key="GridCell.Tab.0.center" timestamp="1591115171392">
+    <state width="1446" height="326" key="GridCell.Tab.0.bottom/0.0.1500.960@0.0.1500.960" timestamp="1591128306002" />
+    <state width="1446" height="326" key="GridCell.Tab.0.center" timestamp="1591128306001">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1454" height="245" key="GridCell.Tab.0.center/0.0.1500.957@0.0.1500.957" timestamp="1591089379887" />
-    <state width="1446" height="326" key="GridCell.Tab.0.center/0.0.1500.960@0.0.1500.960" timestamp="1591115171392" />
-    <state width="1446" height="326" key="GridCell.Tab.0.left" timestamp="1591115171392">
+    <state width="1446" height="326" key="GridCell.Tab.0.center/0.0.1500.960@0.0.1500.960" timestamp="1591128306001" />
+    <state width="1446" height="326" key="GridCell.Tab.0.left" timestamp="1591128306000">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1454" height="245" key="GridCell.Tab.0.left/0.0.1500.957@0.0.1500.957" timestamp="1591089379886" />
-    <state width="1446" height="326" key="GridCell.Tab.0.left/0.0.1500.960@0.0.1500.960" timestamp="1591115171392" />
-    <state width="1446" height="326" key="GridCell.Tab.0.right" timestamp="1591115171392">
+    <state width="1446" height="326" key="GridCell.Tab.0.left/0.0.1500.960@0.0.1500.960" timestamp="1591128306000" />
+    <state width="1446" height="326" key="GridCell.Tab.0.right" timestamp="1591128306002">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1454" height="245" key="GridCell.Tab.0.right/0.0.1500.957@0.0.1500.957" timestamp="1591089379887" />
-    <state width="1446" height="326" key="GridCell.Tab.0.right/0.0.1500.960@0.0.1500.960" timestamp="1591115171392" />
-    <state width="1446" height="298" key="GridCell.Tab.1.bottom" timestamp="1591108487108">
+    <state width="1446" height="326" key="GridCell.Tab.0.right/0.0.1500.960@0.0.1500.960" timestamp="1591128306002" />
+    <state width="1446" height="298" key="GridCell.Tab.1.bottom" timestamp="1591115782120">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1454" height="304" key="GridCell.Tab.1.bottom/0.0.1500.957@0.0.1500.957" timestamp="1591055715419" />
-    <state width="1446" height="298" key="GridCell.Tab.1.bottom/0.0.1500.960@0.0.1500.960" timestamp="1591108487108" />
-    <state width="1446" height="298" key="GridCell.Tab.1.center" timestamp="1591108487107">
+    <state width="1446" height="298" key="GridCell.Tab.1.bottom/0.0.1500.960@0.0.1500.960" timestamp="1591115782120" />
+    <state width="1446" height="298" key="GridCell.Tab.1.center" timestamp="1591115782120">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1454" height="304" key="GridCell.Tab.1.center/0.0.1500.957@0.0.1500.957" timestamp="1591055715418" />
-    <state width="1446" height="298" key="GridCell.Tab.1.center/0.0.1500.960@0.0.1500.960" timestamp="1591108487107" />
-    <state width="1446" height="298" key="GridCell.Tab.1.left" timestamp="1591108487107">
+    <state width="1446" height="298" key="GridCell.Tab.1.center/0.0.1500.960@0.0.1500.960" timestamp="1591115782120" />
+    <state width="1446" height="298" key="GridCell.Tab.1.left" timestamp="1591115782120">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1454" height="304" key="GridCell.Tab.1.left/0.0.1500.957@0.0.1500.957" timestamp="1591055715418" />
-    <state width="1446" height="298" key="GridCell.Tab.1.left/0.0.1500.960@0.0.1500.960" timestamp="1591108487107" />
-    <state width="1446" height="298" key="GridCell.Tab.1.right" timestamp="1591108487107">
+    <state width="1446" height="298" key="GridCell.Tab.1.left/0.0.1500.960@0.0.1500.960" timestamp="1591115782120" />
+    <state width="1446" height="298" key="GridCell.Tab.1.right" timestamp="1591115782120">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1454" height="304" key="GridCell.Tab.1.right/0.0.1500.957@0.0.1500.957" timestamp="1591055715418" />
-    <state width="1446" height="298" key="GridCell.Tab.1.right/0.0.1500.960@0.0.1500.960" timestamp="1591108487107" />
+    <state width="1446" height="298" key="GridCell.Tab.1.right/0.0.1500.960@0.0.1500.960" timestamp="1591115782120" />
     <state x="236" y="62" width="1024" height="848" key="SettingsEditor" timestamp="1590704325257">
       <screen x="0" y="0" width="1500" height="957" />
     </state>
