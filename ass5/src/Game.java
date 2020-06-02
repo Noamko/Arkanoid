@@ -18,7 +18,6 @@ public class Game {
     private BallRemover ballRemover;
     private ScoreIndicator scoreIndicator;
     private ScoreTrackingListener scoreTrackingListener;
-    
     /**
      * Game constructor.
      */
@@ -76,7 +75,7 @@ public class Game {
         scoreIndicator = new ScoreIndicator(score);
         scoreTrackingListener = new ScoreTrackingListener(score);
 
-        loadAss3Game(this, environment, gui);
+        loadAss5Game();
     }
 
     /**
@@ -107,11 +106,14 @@ public class Game {
         }
     }
 
-    public void loadAss3Game(Game game, GameEnvironment environment, GUI gui) {
+    /**
+     * loads ass5 game.
+     */
+    public void loadAss5Game() {
         Block background = new Block(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         background.setColor(Color.DARK_GRAY);
-        background.addToGame(game);
-        game.removeCollidable(background);
+        background.addToGame(this);
+        this.removeCollidable(background);
 
         Block[] grayBlocks = new Block[12];
         Block[] redBlocks = new Block[11];
@@ -130,7 +132,7 @@ public class Game {
                                 * (j), 10 * Config.BLOCK_HEIGHT - Config.BLOCK_HEIGHT
                                 * (i)), Config.BLOCK_WIDTH, Config.BLOCK_HEIGHT);
                 blocksArr[i][j].setColor(rowColors[i]);
-                blocksArr[i][j].addToGame(game);
+                blocksArr[i][j].addToGame(this);
                 blocksArr[i][j].addHitListener(blockRemover);
                 blocksArr[i][j].addHitListener(scoreTrackingListener);
             }
@@ -138,32 +140,32 @@ public class Game {
 
         Ball ball = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, environment);
         ball.setVelocity(Velocity.fromAngleAndSpeed(280, Config.BALL_SPEED));
-        ball.addToGame(game);
+        ball.addToGame(this);
 
         Ball ball2 = new Ball(Config.BALL_2NDSTARTING_POSITION, Config.BALL_RADIUS, environment);
         ball2.setVelocity(Velocity.fromAngleAndSpeed(300, Config.BALL_SPEED));
-        ball2.addToGame(game);
+        ball2.addToGame(this);
 
         Block wallLeft = new Block(
                 new Point(0,  Config.WALL_SIZE), Config.WALL_SIZE, Config.WINDOW_HEIGHT - Config.WALL_SIZE);
-        wallLeft.addToGame(game);
+        wallLeft.addToGame(this);
 
         Block wallRight = new Block(
                 new Point(Config.WINDOW_WIDTH - Config.WALL_SIZE,  Config.WALL_SIZE),
                 Config.WALL_SIZE, Config.WINDOW_HEIGHT - Config.WALL_SIZE);
-        wallRight.addToGame(game);
+        wallRight.addToGame(this);
 
         Block wallTop = new Block(
                 new Point(0,  20), Config.WINDOW_WIDTH , Config.WALL_SIZE);
-        wallTop.addToGame(game);
+        wallTop.addToGame(this);
 
         Block deathWall = new Block(
                 new Point(0,  Config.WINDOW_HEIGHT), Config.WINDOW_WIDTH, Config.WALL_SIZE);
         deathWall.addHitListener(ballRemover);
-        deathWall.addToGame(game);
+        deathWall.addToGame(this);
 
         Paddle paddle = new Paddle(gui);
-        paddle.addToGame(game);
+        paddle.addToGame(this);
 
         this.addSprite(scoreIndicator);
     }

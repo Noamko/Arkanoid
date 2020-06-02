@@ -80,6 +80,7 @@ public class Paddle implements Collidable, Sprite {
      * @param collisionPoint (Point)
      * @param currentVelocity (Velocity)
      * @param collidable (Collidable)
+     * @param hitter Ball
      * @return Velocity
      */
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity, Collidable collidable) {
@@ -90,6 +91,7 @@ public class Paddle implements Collidable, Sprite {
      * occurs when the ball hit the paddle.
      * @param collisionPoint (Point)
      * @param currentVelocity (Velocity)
+     * @param hitter Ball
      * @return Velocity
      */
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {

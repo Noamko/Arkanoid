@@ -1,5 +1,7 @@
 /**
- * Blockremover class.
+ * Noam Koren.
+ * 308192871
+ * ass5
  */
 public class BlockRemover implements HitListener {
     private Game game;
@@ -16,6 +18,7 @@ public class BlockRemover implements HitListener {
         this.remainingBlocks = removedBlocks;
     }
 
+    @Override
     public void hitEvent(Block beingHit, Ball hitter) {
         beingHit.removeFromGame(game);
         remainingBlocks.decrease(1);

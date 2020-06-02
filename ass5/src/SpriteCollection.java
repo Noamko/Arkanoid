@@ -1,7 +1,6 @@
 import biuoop.DrawSurface;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -19,6 +18,10 @@ public class SpriteCollection {
         this.sprites.add(s);
     }
 
+    /**
+     * removes the a given sprite from the collection.
+     * @param s Sprite
+     */
     public void removeSprite(Sprite s) {
         spriteToRemove = s;
     }
@@ -28,7 +31,10 @@ public class SpriteCollection {
      * call timePassed() on all sprites.
      */
     public void notifyAllTimePassed() {
-        if (spriteToRemove != null) sprites.remove(spriteToRemove);
+        if (spriteToRemove != null) {
+            sprites.remove(spriteToRemove);
+        }
+
         for (Sprite s : sprites) {
             s.timePassed();
         }

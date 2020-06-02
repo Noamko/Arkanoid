@@ -10,7 +10,7 @@ import java.util.Random;
  * implement a Collidable and a sprite
  */
 public class Block implements Collidable, Sprite, HitNotifier {
-    List<HitListener> hitListeners;
+    private List<HitListener> hitListeners;
     private Color color;
     private Rectangle rect;
 
@@ -46,6 +46,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
      * @param collisionPoint  (Point)
      * @param currentVelocity (Velocity)
      * @param collidable (Collidable)
+     * @param hitter Ball
      * @return Velocity (Velocity)
      */
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity, Collidable collidable) {
@@ -82,6 +83,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
      * a Second unused Hit constructor.
      * @param collisionPoint (Point)
      * @param currentVelocity (Velocity)
+     * @param hitter Ball
      * @return Velocity
      */
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
@@ -98,7 +100,11 @@ public class Block implements Collidable, Sprite, HitNotifier {
         game.addCollidable(this);
     }
 
-    public void removeFromGame(Game game){
+    /**
+     * removes the current block object from the game.
+     * @param game Game
+     */
+    public void removeFromGame(Game game) {
         game.removeSprite(this);
         game.removeCollidable(this);
     }
@@ -132,6 +138,10 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     }
 
+    /**
+     * occurs each time the block is being hit by the ball.
+     * @param hitter Ball
+     */
     private void notifyHit(Ball hitter) {
         List<HitListener> listeners = new ArrayList<>(this.hitListeners);
         for (HitListener hl : listeners) {
@@ -139,10 +149,18 @@ public class Block implements Collidable, Sprite, HitNotifier {
         }
     }
 
+    /**
+     * add a hit listener to the block obj.
+     * @param hl HitListener
+     */
     public void addHitListener(HitListener hl) {
         this.hitListeners.add(hl);
     }
 
+    /**
+     * removes a hit listener to the block obj.
+     * @param hl HitListener
+     */
     public void removeHitListener(HitListener hl) {
         this.hitListeners.remove(hl);
     }

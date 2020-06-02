@@ -1,3 +1,8 @@
+/**
+ * Noam Koren.
+ * 308192871
+ * ass5
+ */
 public interface HitNotifier {
 
     /**

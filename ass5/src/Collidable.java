@@ -19,6 +19,7 @@ public interface Collidable {
      * occurs when the ball objects hit a collidable.
      * @param collisionPoint (Point)
      * @param currentVelocity (Velocity)
+     * @param hitter Ball
      * @return Velocity
      */
     Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity);

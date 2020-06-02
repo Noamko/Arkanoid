@@ -161,9 +161,13 @@ public class Ball implements Sprite {
 //        game.addSprite(this.trajectory);
     }
 
-    public void removeFromGame(Game game){
+    /**
+     * remove the current ball object from the game.
+     * @param game Game
+     */
+    public void removeFromGame(Game game) {
         game.removeSprite(this);
-        this.velocity = Velocity.fromAngleAndSpeed(0,0);
+        this.velocity = Velocity.fromAngleAndSpeed(0, 0);
     }
 
     /**
