@@ -27,7 +27,7 @@ public class BlockRemover implements HitListener {
 
     @Override
     public void hitEvent(Block beingHit, Ball hitter) {
-        beingHit.removeFromGame(game);
         remainingBlocks.decrease(1);
+        beingHit.removeFromGame(game);
     }
 }

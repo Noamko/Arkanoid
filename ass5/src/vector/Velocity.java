@@ -8,8 +8,8 @@ import geometry.Point;
  * ass2
  */
 public class Velocity {
-    private double x;
-    private double y;
+    private final double x;
+    private final double y;
 
     /**
      * vector.Velocity constructor.

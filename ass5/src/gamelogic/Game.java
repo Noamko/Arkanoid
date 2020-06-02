@@ -115,6 +115,9 @@ public class Game {
             }
 
             if (remainingBlocks.getValue() == 0 || remainingBalls.getValue() == 0) {
+                if (remainingBlocks.getValue() == 0) {
+                    score.increase(100);
+                }
                 gui.close();
                 return;
             }
@@ -144,8 +147,8 @@ public class Game {
                 remainingBlocks.increase(1);
                 blocksArr[i][j] = new Block(
                         new Point(Config.WINDOW_WIDTH - Config.WALL_SIZE - Config.BLOCK_WIDTH
-                                * (j), 10 * Config.BLOCK_HEIGHT - Config.BLOCK_HEIGHT
-                                * (i)), Config.BLOCK_WIDTH, Config.BLOCK_HEIGHT);
+                                * (j +1), 10 * Config.BLOCK_HEIGHT - Config.BLOCK_HEIGHT
+                                * (i +1)), Config.BLOCK_WIDTH, Config.BLOCK_HEIGHT);
                 blocksArr[i][j].setColor(rowColors[i]);
                 blocksArr[i][j].addToGame(this);
                 blocksArr[i][j].addHitListener(blockRemover);
