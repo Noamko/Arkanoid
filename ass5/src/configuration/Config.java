@@ -5,6 +5,7 @@ import geometry.Point;
  * and settings
  */
 public class Config {
+    public static final String WINDOW_TITLE = "Arkanoid";
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 600;
     public static final int WALL_SIZE = 30;

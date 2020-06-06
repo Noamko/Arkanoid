@@ -22,10 +22,9 @@ import java.awt.Color;
 /**
  * gamelogic.Game class.
  */
-public class Game {
+public class Game implements Animation {
     private final SpriteCollection sprites;
     private final GameEnvironment environment;
-    private final GUI gui;
     private Counter remainingBlocks;
     private Counter remainingBalls;
     private Counter score;
@@ -33,13 +32,16 @@ public class Game {
     private BallRemover ballRemover;
     private ScoreIndicator scoreIndicator;
     private ScoreTrackingListener scoreTrackingListener;
+    private boolean shouldStop;
+
     /**
      * gamelogic.Game constructor.
      */
     public Game() {
-        gui = new GUI("Arkanoid", Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
+
+        this.shouldStop = false;
     }
 
     /**
@@ -96,32 +98,21 @@ public class Game {
     /**
      * Run the game -- start the animation loop.
      */
-    public void run() {
-        int framesPerSecond = 60;
-        int millisecondsPerFrame = 1000 / framesPerSecond;
-        Sleeper sleeper = new Sleeper();
-        while (true) {
-            long startTime = System.currentTimeMillis(); // timing
-            DrawSurface d = gui.getDrawSurface();
+    public void doOneFrame(DrawSurface d) {
             this.sprites.notifyAllTimePassed();
             this.sprites.drawAllOn(d);
-            gui.show(d);
-
-            // timing
-            long usedTime = System.currentTimeMillis() - startTime;
-            long milliSecondLeftToSleep = millisecondsPerFrame - usedTime;
-            if (milliSecondLeftToSleep > 0) {
-                sleeper.sleepFor(milliSecondLeftToSleep);
-            }
 
             if (remainingBlocks.getValue() == 0 || remainingBalls.getValue() == 0) {
                 if (remainingBlocks.getValue() == 0) {
                     score.increase(100);
                 }
-                gui.close();
-                return;
+                this.shouldStop = true;
             }
-        }
+    }
+
+    @Override
+    public boolean shouldStop() {
+        return this.shouldStop;
     }
 
     /**
@@ -181,9 +172,6 @@ public class Game {
                 new Point(0,  Config.WINDOW_HEIGHT), Config.WINDOW_WIDTH, Config.WALL_SIZE);
         deathWall.addHitListener(ballRemover);
         deathWall.addToGame(this);
-
-        Paddle paddle = new Paddle(gui);
-        paddle.addToGame(this);
 
         this.addSprite(scoreIndicator);
     }
