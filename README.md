@@ -1,2 +1,2 @@
 # Greetings!
-#Welcome to my homework repo
+Welcome to my homework repo
