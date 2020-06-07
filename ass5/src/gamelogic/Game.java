@@ -2,6 +2,7 @@ package gamelogic;
 
 import biuoop.DrawSurface;
 import biuoop.GUI;
+import biuoop.KeyboardSensor;
 import biuoop.Sleeper;
 import collision.Collidable;
 import configuration.Config;
@@ -33,13 +34,17 @@ public class Game implements Animation {
     private ScoreIndicator scoreIndicator;
     private ScoreTrackingListener scoreTrackingListener;
     private boolean shouldStop;
+    private AnimationRunner runner;
+    private KeyboardSensor keyboard;
 
     /**
      * gamelogic.Game constructor.
      */
-    public Game() {
+    public Game(KeyboardSensor keyboard, AnimationRunner runner) {
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
+        this.runner = runner;
+        this.keyboard = keyboard;
 
         this.shouldStop = false;
     }
@@ -93,11 +98,11 @@ public class Game implements Animation {
         scoreTrackingListener = new ScoreTrackingListener(score);
 
         loadAss5Game();
+
+        Paddle paddle = new Paddle(this.keyboard);
+        paddle.addToGame(this);
     }
 
-    /**
-     * Run the game -- start the animation loop.
-     */
     public void doOneFrame(DrawSurface d) {
             this.sprites.notifyAllTimePassed();
             this.sprites.drawAllOn(d);
@@ -108,6 +113,21 @@ public class Game implements Animation {
                 }
                 this.shouldStop = true;
             }
+
+            // Check if pause was requested.
+            if (this.keyboard.isPressed("p")) {
+                this.runner.run(new PauseScreen(this.keyboard));
+             }
+    }
+    
+    /**
+     * Run the game -- start the animation loop.
+     */
+    public void run()
+    {
+        this.initialize();
+        this.runner.run(new CountdownAnimation(3, 3, this.sprites));
+        this.runner.run(this);
     }
 
     @Override
