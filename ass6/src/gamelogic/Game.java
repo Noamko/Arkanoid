@@ -18,11 +18,13 @@ import ui.SpriteCollection;
 import ui.Sprite;
 import vector.Velocity;
 import java.awt.Color;
+import Animation.Animation;
+import Animation.AnimationRunner;
 
 /**
  * gamelogic.Game class.
  */
-public class Game {
+public class Game implements Animation {
     private final SpriteCollection sprites;
     private final GameEnvironment environment;
     private final GUI gui;
@@ -33,6 +35,8 @@ public class Game {
     private BallRemover ballRemover;
     private ScoreIndicator scoreIndicator;
     private ScoreTrackingListener scoreTrackingListener;
+    private AnimationRunner runner;
+    private boolean running;
     /**
      * gamelogic.Game constructor.
      */
@@ -40,6 +44,7 @@ public class Game {
         gui = new GUI("Arkanoid", Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
+        runner = new AnimationRunner(gui, Config.FPS);
     }
 
     /**
@@ -97,31 +102,8 @@ public class Game {
      * Run the game -- start the animation loop.
      */
     public void run() {
-        int framesPerSecond = 60;
-        int millisecondsPerFrame = 1000 / framesPerSecond;
-        Sleeper sleeper = new Sleeper();
-        while (true) {
-            long startTime = System.currentTimeMillis(); // timing
-            DrawSurface d = gui.getDrawSurface();
-            this.sprites.notifyAllTimePassed();
-            this.sprites.drawAllOn(d);
-            gui.show(d);
-
-            // timing
-            long usedTime = System.currentTimeMillis() - startTime;
-            long milliSecondLeftToSleep = millisecondsPerFrame - usedTime;
-            if (milliSecondLeftToSleep > 0) {
-                sleeper.sleepFor(milliSecondLeftToSleep);
-            }
-
-            if (remainingBlocks.getValue() == 0 || remainingBalls.getValue() == 0) {
-                if (remainingBlocks.getValue() == 0) {
-                    score.increase(100);
-                }
-                gui.close();
-                return;
-            }
-        }
+        this.running = true;
+        this.runner.run(this);
     }
 
     /**
@@ -186,5 +168,27 @@ public class Game {
         paddle.addToGame(this);
 
         this.addSprite(scoreIndicator);
+    }
+
+    @Override
+    public void doOneFrame(DrawSurface d) {
+        // the logic from the previous run method goes here.
+        // the `return` or `break` statements should be replaced with
+        // this.running = false;
+
+        this.sprites.notifyAllTimePassed();
+        this.sprites.drawAllOn(d);
+
+        if (remainingBlocks.getValue() == 0 || remainingBalls.getValue() == 0) {
+            if (remainingBlocks.getValue() == 0) {
+                score.increase(100);
+            }
+            this.running = false;
+        }
+    }
+
+    @Override
+    public boolean shouldStop() {
+        return !this.running;
     }
 }

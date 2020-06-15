@@ -21,4 +21,5 @@ public class Config {
     public static final int COLLISION_ERROR  = 1;
     public static final int SCORE_INDICATOR_HEIGHT = 20;
     public static final int SCORE_INDICATOR_WIDTH = WINDOW_WIDTH;
+    public static final int FPS = 60;
 }
