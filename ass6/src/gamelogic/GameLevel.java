@@ -2,7 +2,7 @@ package gamelogic;
 
 import biuoop.DrawSurface;
 import biuoop.GUI;
-import biuoop.Sleeper;
+import biuoop.KeyboardSensor;
 import collision.Collidable;
 import configuration.Config;
 import geometry.Point;
@@ -16,35 +16,42 @@ import scoresystem.Counter;
 import scoresystem.ScoreTrackingListener;
 import ui.SpriteCollection;
 import ui.Sprite;
+import ui.TopBar;
 import vector.Velocity;
 import java.awt.Color;
-import Animation.Animation;
-import Animation.AnimationRunner;
+import animation.Animation;
+import animation.AnimationRunner;
 
 /**
  * gamelogic.Game class.
  */
-public class Game implements Animation {
+public class GameLevel implements Animation {
     private final SpriteCollection sprites;
     private final GameEnvironment environment;
-    private final GUI gui;
     private Counter remainingBlocks;
     private Counter remainingBalls;
     private Counter score;
+    private Counter lives;
     private BlockRemover blockRemover;
     private BallRemover ballRemover;
     private ScoreIndicator scoreIndicator;
     private ScoreTrackingListener scoreTrackingListener;
-    private AnimationRunner runner;
+    private final AnimationRunner runner;
     private boolean running;
+    private final KeyboardSensor keyboard;
+    private final LevelInformation level;
     /**
-     * gamelogic.Game constructor.
+     * gamelogic Game constructor.
      */
-    public Game() {
-        gui = new GUI("Arkanoid", Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
+    public GameLevel(LevelInformation li) {
+        GUI gui = new GUI("Arkanoid", Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
         runner = new AnimationRunner(gui, Config.FPS);
+        keyboard = gui.getKeyboardSensor();
+        this.level = li;
+        this.lives = new Counter();
+        this.lives.setValue(7);
     }
 
     /**
@@ -88,14 +95,40 @@ public class Game implements Animation {
         blockRemover = new BlockRemover(this, remainingBlocks);
 
         remainingBalls = new Counter();
-        remainingBalls.increase(2);
         ballRemover = new BallRemover(this, remainingBalls);
+
+
+        level.load(this, this.keyboard);
+        for (Block block : level.blocks()) {
+            block.addHitListener(blockRemover);
+        }
+
+        Block wallLeft = new Block(
+                new Point(0,  Config.WALL_SIZE), Config.WALL_SIZE, Config.WINDOW_HEIGHT - Config.WALL_SIZE);
+        wallLeft.addToGame(this);
+
+        Block wallRight = new Block(
+                new Point(Config.WINDOW_WIDTH - Config.WALL_SIZE,  Config.WALL_SIZE),
+                Config.WALL_SIZE, Config.WINDOW_HEIGHT - Config.WALL_SIZE);
+        wallRight.addToGame(this);
+
+        Block wallTop = new Block(
+                new Point(0,  20), Config.WINDOW_WIDTH , Config.WALL_SIZE);
+        wallTop.addToGame(this);
+
+        Block deathWall = new Block(
+                new Point(0,  Config.WINDOW_HEIGHT), Config.WINDOW_WIDTH, Config.WALL_SIZE);
+        deathWall.addHitListener(ballRemover);
+        deathWall.addToGame(this);
 
         score = new Counter();
         scoreIndicator = new ScoreIndicator(score);
         scoreTrackingListener = new ScoreTrackingListener(score);
+        TopBar tb = new TopBar(scoreIndicator,level.levelName(),lives);
+        this.addSprite(tb);
 
-        loadAss5Game();
+        remainingBlocks.setValue(level.numberOfBlocksToRemove());
+        remainingBalls.setValue(level.numberOfBalls());
     }
 
     /**
@@ -164,7 +197,7 @@ public class Game implements Animation {
         deathWall.addHitListener(ballRemover);
         deathWall.addToGame(this);
 
-        Paddle paddle = new Paddle(gui);
+        Paddle paddle = new Paddle(this.keyboard);
         paddle.addToGame(this);
 
         this.addSprite(scoreIndicator);
@@ -172,12 +205,12 @@ public class Game implements Animation {
 
     @Override
     public void doOneFrame(DrawSurface d) {
-        // the logic from the previous run method goes here.
-        // the `return` or `break` statements should be replaced with
-        // this.running = false;
-
         this.sprites.notifyAllTimePassed();
         this.sprites.drawAllOn(d);
+
+        if (this.keyboard.isPressed("p")) {
+            this.runner.run(new PauseScreen(this.keyboard));
+        }
 
         if (remainingBlocks.getValue() == 0 || remainingBalls.getValue() == 0) {
             if (remainingBlocks.getValue() == 0) {
@@ -185,6 +218,10 @@ public class Game implements Animation {
             }
             this.running = false;
         }
+    }
+
+    public GameEnvironment getEnvironment() {
+        return environment;
     }
 
     @Override

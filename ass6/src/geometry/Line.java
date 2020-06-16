@@ -208,7 +208,7 @@ public class Line {
      * @param d DrawSurface
      */
     public void drawOn(DrawSurface d) {
-        d.setColor(Color.black);
+//        d.setColor(Color.black);
         d.drawLine((int) this.start.getX(), (int) this.start.getY(), (int) this.end.getX(), (int) this.end.getY());
     }
 

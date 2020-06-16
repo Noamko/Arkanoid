@@ -1,7 +1,7 @@
 package scoresystem;
 
 import collision.HitListener;
-import gamelogic.Game;
+import gamelogic.GameLevel;
 import objects.Ball;
 import objects.Block;
 
@@ -11,23 +11,23 @@ import objects.Block;
  * ass5
  */
 public class BlockRemover implements HitListener {
-    private Game game;
+    private GameLevel gameLevel;
     private Counter remainingBlocks;
 
     /**
      * block remover is in charge of removing block from the game, as well as keeping count.
      * of the number of blocks that remain
-     * @param game game
+     * @param gameLevel game
      * @param removedBlocks counter
      */
-    public BlockRemover(Game game, Counter removedBlocks) {
-        this.game = game;
+    public BlockRemover(GameLevel gameLevel, Counter removedBlocks) {
+        this.gameLevel = gameLevel;
         this.remainingBlocks = removedBlocks;
     }
 
     @Override
     public void hitEvent(Block beingHit, Ball hitter) {
         remainingBlocks.decrease(1);
-        beingHit.removeFromGame(game);
+        beingHit.removeFromGame(gameLevel);
     }
 }

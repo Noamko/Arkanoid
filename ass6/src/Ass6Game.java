@@ -1,4 +1,5 @@
-package gamelogic;
+import gamelogic.GameLevel;
+import levels.DirectHit;
 
 /**
  * @author Noam Koren
@@ -12,8 +13,8 @@ public class Ass6Game {
      * @param args (String[])
      */
     public static void main(String[] args) {
-        Game game = new Game();
-        game.initialize();
-        game.run();
+        GameLevel gameLevel = new GameLevel(new DirectHit());
+        gameLevel.initialize();
+        gameLevel.run();
     }
 }

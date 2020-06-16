@@ -3,7 +3,7 @@ import biuoop.DrawSurface;
 import collision.Collidable;
 import collision.HitListener;
 import collision.HitNotifier;
-import gamelogic.Game;
+import gamelogic.GameLevel;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
@@ -103,20 +103,20 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     /**
      * add the block object to the game environment.
-     * @param game (gamelogic.Game)
+     * @param gameLevel (gamelogic.Game)
      */
-    public void addToGame(Game game) {
-        game.addSprite(this);
-        game.addCollidable(this);
+    public void addToGame(GameLevel gameLevel) {
+        gameLevel.addSprite(this);
+        gameLevel.addCollidable(this);
     }
 
     /**
      * removes the current block object from the game.
-     * @param game gamelogic.Game
+     * @param gameLevel gamelogic.Game
      */
-    public void removeFromGame(Game game) {
-        game.removeSprite(this);
-        game.removeCollidable(this);
+    public void removeFromGame(GameLevel gameLevel) {
+        gameLevel.removeSprite(this);
+        gameLevel.removeCollidable(this);
     }
 
     /**

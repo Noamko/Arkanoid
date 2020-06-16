@@ -1,9 +1,10 @@
 package objects;
 import biuoop.DrawSurface;
 import biuoop.GUI;
+import biuoop.KeyboardSensor;
 import collision.Collidable;
 import configuration.Config;
-import gamelogic.Game;
+import gamelogic.GameLevel;
 import geometry.Point;
 import geometry.Rectangle;
 import ui.Sprite;
@@ -24,13 +25,13 @@ public class Paddle implements Collidable, Sprite {
 
     /**
      * Paddle constructor.
-     * @param gui Gui
+     * @param k KeyboardSensor
      */
-    public Paddle(GUI gui) {
+    public Paddle(KeyboardSensor k) {
         blockPaddle = new Block(STARTING_POSITION, Config.PADDLE_WIDTH, Config.PADDLE_HEIGHT);
         blockPaddle.setColor(Color.orange);
         this.velocity = new Velocity(Config.PADDLE_SPEED, 0);
-        keyboard = gui.getKeyboardSensor();
+        keyboard = k;
     }
     /**
      * Move the paddle to the left according its velocity.
@@ -122,7 +123,7 @@ public class Paddle implements Collidable, Sprite {
      * add the Paddle to the game.
      * @param g gamelogic.Game
      */
-    public void addToGame(Game g) {
+    public void addToGame(GameLevel g) {
         g.addSprite(this);
         g.addCollidable(this);
     }

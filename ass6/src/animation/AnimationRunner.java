@@ -1,4 +1,4 @@
-package Animation;
+package animation;
 
 import biuoop.DrawSurface;
 import biuoop.GUI;

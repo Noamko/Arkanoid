@@ -7,7 +7,7 @@ package objects;
 import biuoop.DrawSurface;
 import collision.CollisionInfo;
 import configuration.Config;
-import gamelogic.Game;
+import gamelogic.GameLevel;
 import gamelogic.GameEnvironment;
 import geometry.Point;
 import java.awt.Color;
@@ -164,19 +164,19 @@ public class Ball implements Sprite {
 
     /**
      * add the ball object to the game env.
-     * @param game (gamelogic.Game)
+     * @param gameLevel (gamelogic.Game)
      */
-    public void addToGame(Game game) {
-        game.addSprite(this);
+    public void addToGame(GameLevel gameLevel) {
+        gameLevel.addSprite(this);
 //        game.addSprite(this.trajectory);
     }
 
     /**
      * remove the current ball object from the game.
-     * @param game gamelogic.Game
+     * @param gameLevel gamelogic.Game
      */
-    public void removeFromGame(Game game) {
-        game.removeSprite(this);
+    public void removeFromGame(GameLevel gameLevel) {
+        gameLevel.removeSprite(this);
         this.velocity = Velocity.fromAngleAndSpeed(0, 0);
     }
 
