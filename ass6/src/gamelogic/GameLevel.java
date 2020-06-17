@@ -1,14 +1,11 @@
 package gamelogic;
 
 import biuoop.DrawSurface;
-import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import collision.Collidable;
 import configuration.Config;
 import geometry.Point;
-import objects.Ball;
 import objects.Block;
-import objects.Paddle;
 import scoresystem.ScoreIndicator;
 import scoresystem.BallRemover;
 import scoresystem.BlockRemover;
@@ -17,8 +14,6 @@ import scoresystem.ScoreTrackingListener;
 import ui.SpriteCollection;
 import ui.Sprite;
 import ui.TopBar;
-import vector.Velocity;
-import java.awt.Color;
 import animation.Animation;
 import animation.AnimationRunner;
 
@@ -40,18 +35,19 @@ public class GameLevel implements Animation {
     private boolean running;
     private final KeyboardSensor keyboard;
     private final LevelInformation level;
+    public boolean gameCleared = false;
     /**
      * gamelogic Game constructor.
      */
-    public GameLevel(LevelInformation li) {
-        GUI gui = new GUI("Arkanoid", Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
+    public GameLevel(LevelInformation li, AnimationRunner ar, KeyboardSensor ks, Counter score) {
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
-        runner = new AnimationRunner(gui, Config.FPS);
-        keyboard = gui.getKeyboardSensor();
+        runner = ar;
+        keyboard = ks;
         this.level = li;
         this.lives = new Counter();
         this.lives.setValue(7);
+        this.score = score;
     }
 
     /**
@@ -97,7 +93,6 @@ public class GameLevel implements Animation {
         remainingBalls = new Counter();
         ballRemover = new BallRemover(this, remainingBalls);
 
-        score = new Counter();
         scoreIndicator = new ScoreIndicator(score);
         scoreTrackingListener = new ScoreTrackingListener(score);
 
@@ -162,13 +157,11 @@ public class GameLevel implements Animation {
             this.level.getPaddle().stopMoving();
         }
 
-
-
         if (remainingBlocks.getValue() == 0 || remainingBalls.getValue() == 0) {
             if (remainingBlocks.getValue() == 0) {
                 score.increase(100);
+                this.running = false;
             }
-            this.running = false;
         }
         this.sprites.notifyAllTimePassed();
         this.sprites.drawAllOn(d);
@@ -181,5 +174,13 @@ public class GameLevel implements Animation {
     @Override
     public boolean shouldStop() {
         return !this.running;
+    }
+
+    public int blocksLeft() {
+        return remainingBlocks.getValue();
+    }
+
+    public int ballsLeft() {
+        return  remainingBalls.getValue();
     }
 }

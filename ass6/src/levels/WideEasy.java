@@ -81,7 +81,7 @@ public class WideEasy implements LevelInformation {
                 blocks.add(b);
         }
 
-        for (int i = 0; i < numberOfBalls(); i++) {
+        for (int i = 0; i < numberOfBalls()+10; i++) {
             int relativeX = Config.WINDOW_WIDTH / 2;
             int relativeY = Config.WINDOW_HEIGHT / 2;
             if(i < 5) {

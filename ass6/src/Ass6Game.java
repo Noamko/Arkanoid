@@ -1,6 +1,14 @@
+import animation.AnimationRunner;
+import biuoop.GUI;
+import configuration.Config;
+import gamelogic.GameFlow;
 import gamelogic.GameLevel;
+import gamelogic.LevelInformation;
 import levels.DirectHit;
 import levels.WideEasy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Noam Koren
@@ -14,8 +22,14 @@ public class Ass6Game {
      * @param args (String[])
      */
     public static void main(String[] args) {
-        GameLevel gameLevel = new GameLevel(new WideEasy());
-        gameLevel.initialize();
-        gameLevel.run();
+        GUI gui = new GUI("Arkanoid", Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
+        AnimationRunner animationRunner = new AnimationRunner(gui, Config.FPS);
+        List<LevelInformation> lvls = new ArrayList<>();
+        lvls.add(new DirectHit());
+        lvls.add((new WideEasy()));
+
+        GameFlow gameFlow = new GameFlow(animationRunner, gui.getKeyboardSensor());
+        gameFlow.runLevels(lvls);
+        gui.close();
     }
 }

@@ -17,7 +17,7 @@ public class Config {
     public static final int PADDLE_HEIGHT = 20;
     public static final int PADDLE_SPEED = 8;
     public static final Point BALL_STARTING_POSITION = new Point(WINDOW_WIDTH / 2,
-            Config.WINDOW_HEIGHT - Config.PADDLE_HEIGHT);
+            Config.WINDOW_HEIGHT - Config.PADDLE_HEIGHT - 200);
     public static final int COLLISION_ERROR  = 1;
     public static final int SCORE_INDICATOR_HEIGHT = 20;
     public static final int SCORE_INDICATOR_WIDTH = WINDOW_WIDTH;

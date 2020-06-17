@@ -23,29 +23,28 @@ public class DirectHit implements LevelInformation {
     private Block theRedBlockOfTerror;
     private List<Block> blocks;
     private DHBackground bg;
+    Paddle paddle;
 
     public DirectHit() {
         blocks = new ArrayList<>();
         bg = new DHBackground();
+        paddle = new Paddle();
     }
 
+    //TODO: should match new initilize method with padded added ouside this class
     public void load(GameLevel gl) {
-//        gl.addSprite(getBackground());
         theRedBlockOfTerror = new Block(new Point(Config.WINDOW_WIDTH/2 -15,175 - 15),30,30);
         theRedBlockOfTerror.setColor(Color.RED);
         blocks.add(theRedBlockOfTerror);
 
         Ball ball = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, gl.getEnvironment());
-        ball.setVelocity(Velocity.fromAngleAndSpeed(0, Config.BALL_SPEED));
-
+        ball.setVelocity(Velocity.fromAngleAndSpeed(180, Config.BALL_SPEED));
         ball.addToGame(gl);
-        Paddle paddle = new Paddle();
-        paddle.addToGame(gl);
     }
 
     @Override
     public Paddle getPaddle() {
-        return null;
+        return paddle;
     }
 
     @Override
