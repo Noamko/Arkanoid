@@ -142,7 +142,7 @@ public class GameLevel implements Animation {
     public void doOneFrame(DrawSurface d) {
 
         if (this.keyboard.isPressed("p")) {
-            this.runner.run(new PauseScreen(this.keyboard));
+            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY, new PauseScreen()));
         }
 
         else if(this.keyboard.isPressed("left")){
@@ -160,8 +160,8 @@ public class GameLevel implements Animation {
         if (remainingBlocks.getValue() == 0 || remainingBalls.getValue() == 0) {
             if (remainingBlocks.getValue() == 0) {
                 score.increase(100);
-                this.running = false;
             }
+            this.running = false;
         }
         this.sprites.notifyAllTimePassed();
         this.sprites.drawAllOn(d);

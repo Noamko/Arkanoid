@@ -25,10 +25,14 @@ public class GameFlow {
             while (level.blocksLeft() > 0 && level.ballsLeft() > 0) {
                 level.run();
             }
+
             if(level.ballsLeft() == 0) {
-                animationRunner.run(new EndScreen(false, score.getValue(),keyboardSensor));
+                animationRunner.run(new KeyPressStoppableAnimation(
+                        keyboardSensor, "space", new EndScreen(false, this.score.getValue())));
+                return;
             }
         }
-        animationRunner.run(new EndScreen(true, score.getValue(),keyboardSensor));
+        animationRunner.run(new KeyPressStoppableAnimation(
+                keyboardSensor, "space", new EndScreen(true, this.score.getValue())));
     }
 }

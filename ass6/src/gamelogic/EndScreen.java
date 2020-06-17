@@ -10,25 +10,17 @@ public class EndScreen implements Animation {
     private final int score;
     private boolean stop = false;
 
-    public EndScreen(boolean win, int score, KeyboardSensor ks){
+    public EndScreen(boolean win, int score){
         this.gameCleared = win;
         this.score = score;
-        this.keyboard = ks;
     }
 
     @Override
     public void doOneFrame(DrawSurface d) {
         if (this.gameCleared) {
-            //Win screen
             d.drawText(10, d.getHeight() / 2, "You Win!  Your score is " + String.valueOf(score), 32);
-            if (this.keyboard.isPressed(KeyboardSensor.SPACE_KEY)) {
-                this.stop = true;
-            }
         } else {
             d.drawText(10, d.getHeight() / 2, "Game Over Your score is " + String.valueOf(score), 32);
-            if (this.keyboard.isPressed(KeyboardSensor.SPACE_KEY)) {
-                this.stop = true;
-            }
         }
     }
 
