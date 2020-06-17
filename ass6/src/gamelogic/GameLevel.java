@@ -97,11 +97,21 @@ public class GameLevel implements Animation {
         remainingBalls = new Counter();
         ballRemover = new BallRemover(this, remainingBalls);
 
+        score = new Counter();
+        scoreIndicator = new ScoreIndicator(score);
+        scoreTrackingListener = new ScoreTrackingListener(score);
 
-        level.load(this, this.keyboard);
+        this.addSprite(level.getBackground());
+        level.load(this);
+
         for (Block block : level.blocks()) {
+            block.addToGame(this);
             block.addHitListener(blockRemover);
+            block.addHitListener(scoreTrackingListener);
         }
+        remainingBlocks.setValue(level.numberOfBlocksToRemove());
+        remainingBalls.setValue(level.numberOfBalls());
+        level.getPaddle().addToGame(this);
 
         Block wallLeft = new Block(
                 new Point(0,  Config.WALL_SIZE), Config.WALL_SIZE, Config.WINDOW_HEIGHT - Config.WALL_SIZE);
@@ -121,14 +131,8 @@ public class GameLevel implements Animation {
         deathWall.addHitListener(ballRemover);
         deathWall.addToGame(this);
 
-        score = new Counter();
-        scoreIndicator = new ScoreIndicator(score);
-        scoreTrackingListener = new ScoreTrackingListener(score);
         TopBar tb = new TopBar(scoreIndicator,level.levelName(),lives);
         this.addSprite(tb);
-
-        remainingBlocks.setValue(level.numberOfBlocksToRemove());
-        remainingBalls.setValue(level.numberOfBalls());
     }
 
     /**
@@ -139,78 +143,26 @@ public class GameLevel implements Animation {
         this.runner.run(this);
     }
 
-    /**
-     * loads ass5 game.
-     */
-    public void loadAss5Game() {
-        Block background = new Block(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
-        background.setColor(Color.DARK_GRAY);
-        background.addToGame(this);
-        this.removeCollidable(background);
-
-        Block[] grayBlocks = new Block[12];
-        Block[] redBlocks = new Block[11];
-        Block[] yellowBlocks = new Block[10];
-        Block[] blueBlocks = new Block[9];
-        Block[] pinkBlocks = new Block[8];
-        Block[] greenBlocks = new Block[7];
-
-        Block[][] blocksArr = {greenBlocks, pinkBlocks, blueBlocks, yellowBlocks, redBlocks, grayBlocks};
-        Color[] rowColors = {Color.GREEN, Color.PINK, Color.BLUE, Color.YELLOW, Color.RED, Color.GRAY};
-        for (int i = 0; i < blocksArr.length; i++) {
-            for (int j = 0; j < blocksArr[i].length; j++) {
-                remainingBlocks.increase(1);
-                blocksArr[i][j] = new Block(
-                        new Point(Config.WINDOW_WIDTH - Config.WALL_SIZE - Config.BLOCK_WIDTH
-                                * (j +1), 10 * Config.BLOCK_HEIGHT - Config.BLOCK_HEIGHT
-                                * (i +1)), Config.BLOCK_WIDTH, Config.BLOCK_HEIGHT);
-                blocksArr[i][j].setColor(rowColors[i]);
-                blocksArr[i][j].addToGame(this);
-                blocksArr[i][j].addHitListener(blockRemover);
-                blocksArr[i][j].addHitListener(scoreTrackingListener);
-            }
-        }
-
-        Ball ball = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, environment);
-        ball.setVelocity(Velocity.fromAngleAndSpeed(280, Config.BALL_SPEED));
-        ball.addToGame(this);
-
-        Ball ball2 = new Ball(Config.BALL_2ND_STARTING_POSITION, Config.BALL_RADIUS, environment);
-        ball2.setVelocity(Velocity.fromAngleAndSpeed(300, Config.BALL_SPEED));
-        ball2.addToGame(this);
-
-        Block wallLeft = new Block(
-                new Point(0,  Config.WALL_SIZE), Config.WALL_SIZE, Config.WINDOW_HEIGHT - Config.WALL_SIZE);
-        wallLeft.addToGame(this);
-
-        Block wallRight = new Block(
-                new Point(Config.WINDOW_WIDTH - Config.WALL_SIZE,  Config.WALL_SIZE),
-                Config.WALL_SIZE, Config.WINDOW_HEIGHT - Config.WALL_SIZE);
-        wallRight.addToGame(this);
-
-        Block wallTop = new Block(
-                new Point(0,  20), Config.WINDOW_WIDTH , Config.WALL_SIZE);
-        wallTop.addToGame(this);
-
-        Block deathWall = new Block(
-                new Point(0,  Config.WINDOW_HEIGHT), Config.WINDOW_WIDTH, Config.WALL_SIZE);
-        deathWall.addHitListener(ballRemover);
-        deathWall.addToGame(this);
-
-        Paddle paddle = new Paddle(this.keyboard);
-        paddle.addToGame(this);
-
-        this.addSprite(scoreIndicator);
-    }
-
     @Override
     public void doOneFrame(DrawSurface d) {
-        this.sprites.notifyAllTimePassed();
-        this.sprites.drawAllOn(d);
 
         if (this.keyboard.isPressed("p")) {
             this.runner.run(new PauseScreen(this.keyboard));
         }
+
+        else if(this.keyboard.isPressed("left")){
+            this.level.getPaddle().moveLeft();
+        }
+
+        else if(this.keyboard.isPressed("right")){
+            this.level.getPaddle().moveRight();
+
+        }
+        else {
+            this.level.getPaddle().stopMoving();
+        }
+
+
 
         if (remainingBlocks.getValue() == 0 || remainingBalls.getValue() == 0) {
             if (remainingBlocks.getValue() == 0) {
@@ -218,6 +170,8 @@ public class GameLevel implements Animation {
             }
             this.running = false;
         }
+        this.sprites.notifyAllTimePassed();
+        this.sprites.drawAllOn(d);
     }
 
     public GameEnvironment getEnvironment() {

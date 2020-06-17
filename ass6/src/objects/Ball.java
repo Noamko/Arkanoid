@@ -59,6 +59,7 @@ public class Ball implements Sprite {
         this.radius = r;
         this.color = color;
         this.velocity = new Velocity(0, 0);
+        this.trajectory = new Trajectory(center, this.velocity);
         this.gameEnvironment = ge;
     }
 
@@ -168,7 +169,7 @@ public class Ball implements Sprite {
      */
     public void addToGame(GameLevel gameLevel) {
         gameLevel.addSprite(this);
-//        game.addSprite(this.trajectory);
+//        gameLevel.addSprite(this.trajectory);
     }
 
     /**
@@ -193,8 +194,7 @@ public class Ball implements Sprite {
             //Collision detected
             if (collisionInfo.error() == Config.COLLISION_ERROR) {
 //                System.out.println("COLLISION_ERROR");
-
-                collisionInfo.collisionObject().hit(this, collisionInfo.collisionPoint(), this.velocity);
+                collisionInfo.collisionObject().hit(this, this.center, this.velocity);
 
                 velocity = Velocity.fromAngleAndSpeed(
                         this.velocity.getAngle() + 180 + random.nextInt(45), velocity.getSpeed());

@@ -3,6 +3,7 @@ package gamelogic;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import objects.Block;
+import objects.Paddle;
 import scoresystem.BallRemover;
 import scoresystem.BlockRemover;
 import ui.Sprite;
@@ -29,5 +30,7 @@ public interface LevelInformation {
     // This number should be <= blocks.size();
     int numberOfBlocksToRemove();
 
-    void load(GameLevel gl, KeyboardSensor k);
+    void load(GameLevel gl);
+
+    Paddle getPaddle();
 }

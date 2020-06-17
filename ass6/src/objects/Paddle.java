@@ -21,51 +21,52 @@ public class Paddle implements Collidable, Sprite {
             Config.WINDOW_HEIGHT - Config.PADDLE_HEIGHT);
     private Block blockPaddle;
     private Velocity velocity;
-    private biuoop.KeyboardSensor keyboard;
+    private int width;
+    private int diraction;
 
     /**
      * Paddle constructor.
-     * @param k KeyboardSensor
      */
-    public Paddle(KeyboardSensor k) {
+    public Paddle() {
+        width = Config.PADDLE_WIDTH;
         blockPaddle = new Block(STARTING_POSITION, Config.PADDLE_WIDTH, Config.PADDLE_HEIGHT);
         blockPaddle.setColor(Color.orange);
         this.velocity = new Velocity(Config.PADDLE_SPEED, 0);
-        keyboard = k;
+//        keyboard = k;
+        diraction = 1;
     }
     /**
      * Move the paddle to the left according its velocity.
      */
     public void moveLeft() {
+        diraction = -1;
         this.velocity = new Velocity(Config.PADDLE_SPEED * -1, 0);
-        blockPaddle.getCollisionRectangle().setUpperleft(
-                velocity.applyToPoint(this.blockPaddle.getCollisionRectangle().getUpperLeft()));
     }
 
     /**
      * Move the paddle to the right according its velocity.
      */
     public void moveRight() {
+        diraction = 1;
         this.velocity = new Velocity(Config.PADDLE_SPEED, 0);
-        blockPaddle.getCollisionRectangle().setUpperleft(
-                velocity.applyToPoint(this.blockPaddle.getCollisionRectangle().getUpperLeft()));
+    }
+
+    public void stopMoving() {
+        this.velocity = new Velocity(0, 0);
     }
 
     /**
      * occurs each frame.
      */
     public void timePassed() {
-        if (keyboard.isPressed("right")) {
-            if (this.blockPaddle.getCollisionRectangle().getUpperLeft().getX()
-                    + Config.PADDLE_WIDTH < Config.WINDOW_WIDTH - Config.WALL_SIZE) {
-                moveRight();
-            }
+        if(diraction == 1 && this.blockPaddle.getCollisionRectangle().getUpperLeft().getX()
+                    + this.width < Config.WINDOW_WIDTH - Config.WALL_SIZE) {
+            blockPaddle.getCollisionRectangle().setUpperleft(
+                    velocity.applyToPoint(this.blockPaddle.getCollisionRectangle().getUpperLeft()));
         }
-
-        if (keyboard.isPressed("left")) {
-            if (this.blockPaddle.getCollisionRectangle().getUpperLeft().getX()  >  Config.WALL_SIZE) {
-                moveLeft();
-            }
+        else if (diraction == -1 && this.blockPaddle.getCollisionRectangle().getUpperLeft().getX()  >  Config.WALL_SIZE) {
+            blockPaddle.getCollisionRectangle().setUpperleft(
+                    velocity.applyToPoint(this.blockPaddle.getCollisionRectangle().getUpperLeft()));
         }
     }
 
@@ -108,9 +109,9 @@ public class Paddle implements Collidable, Sprite {
         int[] angles = {300, 330, 0, 30, 60};
         for (int i  = 1; i <= 5; i++) {
             if (collisionPoint.distance(
-                    this.getCollisionRectangle().getUpperLeft()) <= (Config.PADDLE_WIDTH / 5) * i
+                    this.getCollisionRectangle().getUpperLeft()) <= (this.width / 5) * i
                     && collisionPoint.distance(
-                            this.getCollisionRectangle().getUpperLeft()) > (Config.PADDLE_WIDTH / 5) * (i - 1)) {
+                            this.getCollisionRectangle().getUpperLeft()) > (this.width / 5) * (i - 1)) {
                 return Velocity.fromAngleAndSpeed(
                         angles[i - 1], currentVelocity.getSpeed());
             }
@@ -126,5 +127,19 @@ public class Paddle implements Collidable, Sprite {
     public void addToGame(GameLevel g) {
         g.addSprite(this);
         g.addCollidable(this);
+    }
+
+    public void setVelocity(int v) {
+        this.velocity = new Velocity(v,0);
+    }
+
+    public void setWidth(double w) {
+        blockPaddle = new Block(STARTING_POSITION, w, Config.PADDLE_HEIGHT);
+        blockPaddle.setColor(Color.orange);
+        this.width = (int) w;
+    }
+
+    public int getWidth() {
+        return this.width;
     }
 }

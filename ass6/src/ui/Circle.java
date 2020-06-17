@@ -11,23 +11,28 @@ public class Circle implements Sprite {
     private Color fill;
     private Point center;
     private boolean shouldfill = false;
+    private boolean drawStroke = false;
 
-    public Circle(Point center, int r, Color stroke) {
-        this.stroke = stroke;
+    public Circle(Point center, int r) {
         this.radius = r;
         this.center = center;
     }
 
+    public void setStroke(Color c) {
+        this.drawStroke = true;
+        this.stroke = c;
+    }
     public void fillCircle(Color c) {
-        this.fill = c;
         this.shouldfill = true;
+        this.fill = c;
     }
 
     @Override
     public void drawOn(DrawSurface d) {
-        d.setColor(this.stroke);
-        d.drawCircle((int) this.center.getX(), (int) this.center.getY(),this.radius);
-
+        if(drawStroke) {
+            d.setColor(this.stroke);
+            d.drawCircle((int) this.center.getX(), (int) this.center.getY(),this.radius);
+        }
         if(shouldfill) {
             d.setColor(this.fill);
             d.fillCircle((int) this.center.getX(), (int) this.center.getY(),this.radius);

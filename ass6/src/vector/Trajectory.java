@@ -5,12 +5,14 @@ import geometry.Line;
 import geometry.Point;
 import ui.Sprite;
 
+import java.awt.*;
+
 /**
  * vector.Trajectory Class.
  */
 public class Trajectory implements Sprite {
     private Line trajectoryLine;
-    private double mul = 5;
+    private double mul = 10;
 
     /**
      * vector.Trajectory Constructor.
@@ -45,6 +47,7 @@ public class Trajectory implements Sprite {
      * @param d (DrawSurface)
      */
     public void drawOn(DrawSurface d) {
+        d.setColor(Color.BLACK);
         trajectoryLine.drawOn(d);
     }
 

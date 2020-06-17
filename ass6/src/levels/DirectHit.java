@@ -24,21 +24,28 @@ public class DirectHit implements LevelInformation {
     private List<Block> blocks;
     private DHBackground bg;
 
-    public void load(GameLevel gl, KeyboardSensor k) {
+    public DirectHit() {
         blocks = new ArrayList<>();
         bg = new DHBackground();
-        gl.addSprite(getBackground());
+    }
+
+    public void load(GameLevel gl) {
+//        gl.addSprite(getBackground());
         theRedBlockOfTerror = new Block(new Point(Config.WINDOW_WIDTH/2 -15,175 - 15),30,30);
         theRedBlockOfTerror.setColor(Color.RED);
         blocks.add(theRedBlockOfTerror);
-        theRedBlockOfTerror.addToGame(gl);
 
         Ball ball = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, gl.getEnvironment());
         ball.setVelocity(Velocity.fromAngleAndSpeed(0, Config.BALL_SPEED));
 
         ball.addToGame(gl);
-        Paddle paddle = new Paddle(k);
+        Paddle paddle = new Paddle();
         paddle.addToGame(gl);
+    }
+
+    @Override
+    public Paddle getPaddle() {
+        return null;
     }
 
     @Override
@@ -87,8 +94,10 @@ class DHBackground extends Background {
         Stripe s1 = new Stripe(new Line(Config.WINDOW_WIDTH/2,50,Config.WINDOW_WIDTH/2,300), Color.BLUE);
         Stripe s2 = new Stripe(new Line(250,175,550,175), Color.BLUE);
         Block back = new Block(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
-        Circle outerCircle = new Circle(s1.getLine().middle(), 100,Color.BLUE);
-        Circle innerCircle = new Circle(s1.getLine().middle(), 50,Color.BLUE);
+        Circle outerCircle = new Circle(s1.getLine().middle(), 100);
+        outerCircle.setStroke(Color.BLUE);
+        Circle innerCircle = new Circle(s1.getLine().middle(), 50);
+        innerCircle.setStroke(Color.BLUE);
         back.setColor(Color.BLACK);
 
         super.getSprites().add(back);

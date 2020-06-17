@@ -9,8 +9,6 @@ import java.util.List;
  */
 public class SpriteCollection {
     private List<Sprite> sprites = new ArrayList<Sprite>();
-    private  Sprite spriteToRemove;
-
     /**
      * add a new ui.Sprite to the collection.
      * @param s ui.Sprite
@@ -24,7 +22,7 @@ public class SpriteCollection {
      * @param s ui.Sprite
      */
     public void removeSprite(Sprite s) {
-        spriteToRemove = s;
+        sprites.remove(s);
     }
 
 
@@ -32,11 +30,8 @@ public class SpriteCollection {
      * call timePassed() on all sprites.
      */
     public void notifyAllTimePassed() {
-        if (spriteToRemove != null) {
-            sprites.remove(spriteToRemove);
-        }
-
-        for (Sprite s : sprites) {
+        List<Sprite> spritesCopy = new ArrayList(this.sprites);
+        for (Sprite s : spritesCopy) {
             s.timePassed();
         }
     }
