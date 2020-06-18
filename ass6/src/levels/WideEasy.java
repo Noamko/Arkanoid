@@ -14,20 +14,25 @@ import vector.Velocity;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * wide easy class.
  */
 public class WideEasy implements LevelInformation {
-    private List<Block> blocks;
-    private Paddle paddle;
-    private Background bg;
+    private final List<Velocity> ballVelocitys;
+    private final List<Block> blocks;
+    private final Paddle paddle;
+    private final Background bg;
+    private final int numberOfBalls = 10;
+    private final int rows = 15;
 
     /**
      * constrcutor.
      */
     public WideEasy() {
         blocks = new ArrayList<>();
+        ballVelocitys = new ArrayList<>();
         bg = new WEBackground();
         paddle = new Paddle();
     }
@@ -38,7 +43,7 @@ public class WideEasy implements LevelInformation {
      * @return int
      */
     public int numberOfBalls() {
-        return 10;
+        return ballVelocitys.size();
     }
 
     @Override
@@ -48,7 +53,7 @@ public class WideEasy implements LevelInformation {
      * @return List
      */
     public List<Velocity> initialBallVelocities() {
-        return null;
+        return ballVelocitys;
     }
 
     @Override
@@ -115,28 +120,32 @@ public class WideEasy implements LevelInformation {
      */
     public void load(GameLevel gl) {
         Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PINK, Color.CYAN};
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < rows; i++) {
                 Block b = new Block(new Point(Config.WALL_SIZE + Config.BLOCK_WIDTH * i, 270),
                         Config.BLOCK_WIDTH, Config.BLOCK_HEIGHT);
                 b.setColor(colors[i / 3]);
                 blocks.add(b);
         }
 
-        for (int i = 0; i < numberOfBalls(); i++) {
+        Random rand = new Random();
+        for (int i = 0; i < numberOfBalls; i++) {
             int relativeX = Config.WINDOW_WIDTH / 2;
             int relativeY = Config.WINDOW_HEIGHT / 2;
+            Velocity v = Velocity.fromAngleAndSpeed(
+                    Config.DIRACTION_UP + rand.nextInt(10),
+                    Config.BALL_SPEED + rand.nextInt(2));
             if (i < 5) {
                 Ball b = new Ball(new Point(
-                        relativeX / 1.1 - i * 30, relativeY  + i * 30), 5, gl.getEnvironment());
-                b.setVelocity(Velocity.fromAngleAndSpeed(180, Config.BALL_SPEED));
+                        relativeX / 1.1 - i * 30, relativeY + i * 30), 5, gl.getEnvironment());
+                b.setVelocity(v);
                 b.addToGame(gl);
-            }
-            if (i >= 5) {
+            } else {
                 Ball b = new Ball(new Point(
                         relativeX * 1.1 + (i - 5) * 30, relativeY + (i - 5) * 30), 5, gl.getEnvironment());
-                b.setVelocity(Velocity.fromAngleAndSpeed(180, Config.BALL_SPEED));
+                b.setVelocity(v);
                 b.addToGame(gl);
             }
+            ballVelocitys.add(v);
         }
         paddle.setWidth(600);
     }
@@ -166,7 +175,7 @@ class WEBackground extends Background  {
         //so i found it useless to change each background pixel values as below
         //and store them in const variables
         //HAPPY CHECKING :)
-        addBlock(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, Color.white);
+        addBlock(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, Color.decode("#8FB7C1"));
         //Sun
         Point sunCenter = new Point(Config.WINDOW_WIDTH / 4, Config.WINDOW_HEIGHT / 4);
         for (int i = 1; i < 1000; i += 20) {

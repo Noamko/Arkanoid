@@ -19,16 +19,17 @@ import java.util.List;
  * direct hit class.
  */
 public class DirectHit implements LevelInformation {
-    private Block theRedBlockOfTerror;
-    private List<Block> blocks;
-    private DHBackground bg;
-    private Paddle paddle;
+    private final List<Velocity> ballVelocitys;
+    private final List<Block> blocks;
+    private final DHBackground bg;
+    private final Paddle paddle;
 
     /**
      * constructor.
      */
     public DirectHit() {
         blocks = new ArrayList<>();
+        ballVelocitys = new ArrayList<>();
         bg = new DHBackground();
         paddle = new Paddle();
     }
@@ -38,12 +39,13 @@ public class DirectHit implements LevelInformation {
      * @param gl Gamelevel
      */
     public void load(GameLevel gl) {
-        theRedBlockOfTerror = new Block(new Point(Config.WINDOW_WIDTH / 2 - 15, 175 - 15), 30, 30);
+        Block theRedBlockOfTerror = new Block(new Point(Config.WINDOW_WIDTH / 2 - 15, 175 - 15), 30, 30);
         theRedBlockOfTerror.setColor(Color.RED);
         blocks.add(theRedBlockOfTerror);
 
         Ball ball = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, gl.getEnvironment());
-        ball.setVelocity(Velocity.fromAngleAndSpeed(180, Config.BALL_SPEED));
+        ballVelocitys.add(Velocity.fromAngleAndSpeed(Config.DIRACTION_UP, Config.BALL_SPEED));
+        ball.setVelocity(ballVelocitys.get(0));
         ball.addToGame(gl);
     }
 
@@ -72,7 +74,7 @@ public class DirectHit implements LevelInformation {
      * @return List
      */
     public List<Velocity> initialBallVelocities() {
-        return null;
+        return ballVelocitys;
     }
 
     @Override

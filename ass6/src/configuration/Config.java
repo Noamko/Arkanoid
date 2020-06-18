@@ -14,7 +14,7 @@ public class Config {
     public static final int WINDOW_HEIGHT = 600;
     public static final int WALL_SIZE = 25;
     public static final int BALL_RADIUS = 5;
-    public static final int BALL_SPEED = 5;
+    public static final int BALL_SPEED = 4;
     public static final int BLOCK_WIDTH = 50;
     public static final int BLOCK_HEIGHT = 25;
     public static final int INVALID_SLOPE = -999;
@@ -27,4 +27,8 @@ public class Config {
     public static final int SCORE_INDICATOR_HEIGHT = 20;
     public static final int SCORE_INDICATOR_WIDTH = WINDOW_WIDTH;
     public static final int FPS = 60;
+    public static final int DIRACTION_DOWN = 180;
+    public static final int DIRACTION_UP = 0;
+    public static final int DIRACTION_LEFT = 90;
+    public static final int DIRACTION_RIGHT = 270;
 }

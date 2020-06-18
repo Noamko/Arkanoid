@@ -15,14 +15,17 @@ import javax.swing.plaf.ColorUIResource;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * green3 class.
  */
 public class Green3 implements LevelInformation {
-    private List<Block> blocks;
-    private Paddle paddle;
-    private Background bg;
+    private final List<Block> blocks;
+    private final Paddle paddle;
+    private final Background bg;
+    private final List<Velocity> ballVelocitys;
+    private final int numberOfBalls = 2;
 
     /**
      * constructor.
@@ -31,6 +34,7 @@ public class Green3 implements LevelInformation {
         bg = new G3Background();
         blocks = new ArrayList<>();
         paddle = new Paddle();
+        ballVelocitys = new ArrayList<>();
 
     }
     @Override
@@ -39,7 +43,7 @@ public class Green3 implements LevelInformation {
      * @return int
      */
     public int numberOfBalls() {
-        return 2;
+        return ballVelocitys.size();
     }
 
     @Override
@@ -49,7 +53,7 @@ public class Green3 implements LevelInformation {
      * @return List
      */
     public List<Velocity> initialBallVelocities() {
-        return null;
+        return ballVelocitys;
     }
 
     @Override
@@ -135,12 +139,16 @@ public class Green3 implements LevelInformation {
                 blocks.add(blocksArr[i][j]);
             }
         }
-        Ball b1 = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, gl.getEnvironment());
-        Ball b2 = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, gl.getEnvironment());
-        b1.setVelocity(Velocity.fromAngleAndSpeed(0, Config.BALL_SPEED));
-        b2.setVelocity(Velocity.fromAngleAndSpeed(10, Config.BALL_SPEED));
-        b1.addToGame(gl);
-        b2.addToGame(gl);
+        Random rand = new Random();
+        for (int i = 0; i < numberOfBalls; i++) {
+            Velocity v = Velocity.fromAngleAndSpeed(
+                    Config.DIRACTION_UP + rand.nextInt(10),
+                    Config.BALL_SPEED + rand.nextInt(2));
+            Ball b = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, gl.getEnvironment());
+            b.setVelocity(v);
+            b.addToGame(gl);
+            ballVelocitys.add(v);
+        }
     }
 
     @Override

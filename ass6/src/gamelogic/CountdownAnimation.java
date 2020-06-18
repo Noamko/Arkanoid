@@ -47,7 +47,7 @@ public class CountdownAnimation implements Animation {
 
         d.setColor(Color.WHITE);
         if (countFrom > 0) {
-            d.drawText(Config.WINDOW_WIDTH / 2, 40, String.valueOf(countFrom), 20);
+            d.drawText(Config.WINDOW_WIDTH / 2, 80, String.valueOf(countFrom), 40);
         }
         if (countFrom == 0) {
             this.stop = true;

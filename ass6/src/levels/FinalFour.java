@@ -15,14 +15,20 @@ import vector.Velocity;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * final four class.
  */
 public class FinalFour implements LevelInformation {
-    private List<Block> blocks;
-    private Paddle paddle;
-    private Background bg;
+    private final List<Velocity> ballVelocitys;
+    private final List<Block> blocks;
+    private final Paddle paddle;
+    private final Background bg;
+    private final int numberOfBalls = 3;
+    private final int rows = 15;
+    private final int margins = 100;
+
 
     /**
      * constractor.
@@ -31,6 +37,7 @@ public class FinalFour implements LevelInformation {
         blocks = new ArrayList<>();
         paddle = new Paddle();
         bg = new FFBackground();
+        ballVelocitys = new ArrayList<>();
     }
 
     @Override
@@ -39,7 +46,7 @@ public class FinalFour implements LevelInformation {
      * @return int
      */
     public int numberOfBalls() {
-        return 3;
+        return ballVelocitys.size();
     }
 
     @Override
@@ -49,7 +56,7 @@ public class FinalFour implements LevelInformation {
      * @return List
      */
     public List<Velocity> initialBallVelocities() {
-        return null;
+        return ballVelocitys;
     }
 
     @Override
@@ -117,24 +124,25 @@ public class FinalFour implements LevelInformation {
     public void load(GameLevel gl) {
 
         Color[] rowColors = {Color.GRAY, Color.RED, Color.YELLOW, Color.GREEN, Color.WHITE, Color.PINK, Color.CYAN};
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 15; j++) {
+        for (int i = 0; i < rowColors.length; i++) {
+            for (int j = 0; j < rows; j++) {
                 Block block = new Block(
-                        new Point(Config.WALL_SIZE + (Config.BLOCK_WIDTH * j), 100 + Config.BLOCK_HEIGHT * i),
+                        new Point(Config.WALL_SIZE + (Config.BLOCK_WIDTH * j), margins + Config.BLOCK_HEIGHT * i),
                         Config.BLOCK_WIDTH, Config.BLOCK_HEIGHT);
                         block.setColor(rowColors[i]);
                 blocks.add(block);
             }
         }
-        Ball b1 = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, gl.getEnvironment());
-        Ball b2 = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, gl.getEnvironment());
-        Ball b3 = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, gl.getEnvironment());
-        b1.setVelocity(Velocity.fromAngleAndSpeed(0, Config.BALL_SPEED));
-        b2.setVelocity(Velocity.fromAngleAndSpeed(10, Config.BALL_SPEED));
-        b3.setVelocity(Velocity.fromAngleAndSpeed(15, Config.BALL_SPEED));
-        b1.addToGame(gl);
-        b2.addToGame(gl);
-        b3.addToGame(gl);
+        Random rand = new Random();
+        for (int i = 0; i < numberOfBalls; i++) {
+            Velocity v = Velocity.fromAngleAndSpeed(
+                    Config.DIRACTION_UP + rand.nextInt(10),
+                    Config.BALL_SPEED + rand.nextInt(2));
+            Ball b = new Ball(Config.BALL_STARTING_POSITION, Config.BALL_RADIUS, gl.getEnvironment());
+            b.setVelocity(v);
+            b.addToGame(gl);
+            ballVelocitys.add(v);
+        }
     }
 
     @Override
@@ -155,7 +163,7 @@ class FFBackground extends Background {
      * final fouar background.
      */
     public FFBackground() {
-        //Note about these magic numbers**///////////////////////////////////////////
+        ///////////////////////Note about these magic numbers//////////////////////////////////
         //these numbers are just to place the sprite on the screen to create drawings
         //put each one in a variable just so it wont be a "magic number is useless
         //changing these values wont change the game play it will just change the background
