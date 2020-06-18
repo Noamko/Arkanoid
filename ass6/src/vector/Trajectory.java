@@ -4,8 +4,7 @@ import biuoop.DrawSurface;
 import geometry.Line;
 import geometry.Point;
 import ui.Sprite;
-
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * vector.Trajectory Class.

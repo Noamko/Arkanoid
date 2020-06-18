@@ -2,7 +2,6 @@ import animation.AnimationRunner;
 import biuoop.GUI;
 import configuration.Config;
 import gamelogic.GameFlow;
-import gamelogic.GameLevel;
 import gamelogic.LevelInformation;
 import levels.DirectHit;
 import levels.FinalFour;
@@ -15,7 +14,7 @@ import java.util.List;
 /**
  * @author Noam Koren
  * 308192871
- * ass3
+ * ass6
  */
 public class Ass6Game {
     /**
@@ -52,7 +51,7 @@ public class Ass6Game {
                         break;
                 }
             }
-        } else if(args.length >= 0) {
+        } else if (args.length >= 0) {
             lvls.add(new DirectHit());
             lvls.add(new WideEasy());
             lvls.add(new Green3());

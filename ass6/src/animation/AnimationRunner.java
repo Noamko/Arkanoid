@@ -4,17 +4,29 @@ import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
 
-
+/**
+ * Animmation runner class.
+ * run an internal loop to create animations.
+ */
 public class AnimationRunner {
     private GUI gui;
     private int framesPerSecond;
-    Sleeper sleeper = new Sleeper();
+    private Sleeper sleeper = new Sleeper();
 
+    /**
+     * constructor.
+     * @param gui GUI
+     * @param fps int
+     */
     public AnimationRunner(GUI gui, int fps) {
         this.framesPerSecond = fps;
         this.gui = gui;
     }
 
+    /**
+     * runs the animation.
+     * @param animation Animation
+     */
     public void run(Animation animation) {
         int millisecondsPerFrame = 1000 / framesPerSecond;
         while (!animation.shouldStop()) {

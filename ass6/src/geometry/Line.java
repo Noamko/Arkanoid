@@ -1,7 +1,6 @@
 package geometry;
 import biuoop.DrawSurface;
 import configuration.Config;
-import java.awt.Color;
 
 /**
  * @author Noam Koren

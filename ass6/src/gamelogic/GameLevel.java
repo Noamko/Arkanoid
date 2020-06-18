@@ -35,9 +35,12 @@ public class GameLevel implements Animation {
     private boolean running;
     private final KeyboardSensor keyboard;
     private final LevelInformation level;
-    public boolean gameCleared = false;
     /**
      * gamelogic Game constructor.
+     * @param li  LevelInformation
+     * @param ar AnimationRunner
+     * @param ks Keybaordsensor
+     * @param score Counter
      */
     public GameLevel(LevelInformation li, AnimationRunner ar, KeyboardSensor ks, Counter score) {
         sprites = new SpriteCollection();
@@ -126,7 +129,7 @@ public class GameLevel implements Animation {
         deathWall.addHitListener(ballRemover);
         deathWall.addToGame(this);
 
-        TopBar tb = new TopBar(scoreIndicator,level.levelName(),lives);
+        TopBar tb = new TopBar(scoreIndicator, level.levelName(), lives);
         this.addSprite(tb);
     }
 
@@ -144,17 +147,12 @@ public class GameLevel implements Animation {
 
         if (this.keyboard.isPressed("p")) {
             this.runner.run(new KeyPressStoppableAnimation(this.keyboard, "space", new PauseScreen()));
-        }
-
-        else if(this.keyboard.isPressed("left")){
+        } else if (this.keyboard.isPressed("left")) {
             this.level.getPaddle().moveLeft();
-        }
-
-        else if(this.keyboard.isPressed("right")){
+        } else if (this.keyboard.isPressed("right")) {
             this.level.getPaddle().moveRight();
 
-        }
-        else {
+        } else {
             this.level.getPaddle().stopMoving();
         }
 
@@ -168,6 +166,10 @@ public class GameLevel implements Animation {
         this.sprites.drawAllOn(d);
     }
 
+    /**
+     * return the game env.
+     * @return GameEnviroment
+     */
     public GameEnvironment getEnvironment() {
         return environment;
     }
@@ -177,10 +179,18 @@ public class GameLevel implements Animation {
         return !this.running;
     }
 
+    /**
+     * return the amount of blocks that are still standing.
+     * @return int
+     */
     public int blocksLeft() {
         return remainingBlocks.getValue();
     }
 
+    /**
+     * return the amount of ball that are still playing.
+     * @return int
+     */
     public int ballsLeft() {
         return  remainingBalls.getValue();
     }

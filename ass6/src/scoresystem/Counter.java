@@ -32,7 +32,11 @@ public class Counter {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    /**
+     * set the value of the score.
+     * @param v int
+     */
+    public void setValue(int v) {
+        this.value = v;
     }
 }

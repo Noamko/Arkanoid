@@ -1,7 +1,6 @@
 package objects;
+
 import biuoop.DrawSurface;
-import biuoop.GUI;
-import biuoop.KeyboardSensor;
 import collision.Collidable;
 import configuration.Config;
 import gamelogic.GameLevel;
@@ -9,7 +8,6 @@ import geometry.Point;
 import geometry.Rectangle;
 import ui.Sprite;
 import vector.Velocity;
-
 import java.awt.Color;
 
 /**
@@ -51,6 +49,9 @@ public class Paddle implements Collidable, Sprite {
         this.velocity = new Velocity(Config.PADDLE_SPEED, 0);
     }
 
+    /**
+     * stop the paddle.
+     */
     public void stopMoving() {
         this.velocity = new Velocity(0, 0);
     }
@@ -59,12 +60,12 @@ public class Paddle implements Collidable, Sprite {
      * occurs each frame.
      */
     public void timePassed() {
-        if(diraction == 1 && this.blockPaddle.getCollisionRectangle().getUpperLeft().getX()
+        if (diraction == 1 && this.blockPaddle.getCollisionRectangle().getUpperLeft().getX()
                     + this.width < Config.WINDOW_WIDTH - Config.WALL_SIZE) {
             blockPaddle.getCollisionRectangle().setUpperleft(
                     velocity.applyToPoint(this.blockPaddle.getCollisionRectangle().getUpperLeft()));
-        }
-        else if (diraction == -1 && this.blockPaddle.getCollisionRectangle().getUpperLeft().getX()  >  Config.WALL_SIZE) {
+        } else if (diraction == -1
+                && this.blockPaddle.getCollisionRectangle().getUpperLeft().getX() > Config.WALL_SIZE) {
             blockPaddle.getCollisionRectangle().setUpperleft(
                     velocity.applyToPoint(this.blockPaddle.getCollisionRectangle().getUpperLeft()));
         }
@@ -129,16 +130,28 @@ public class Paddle implements Collidable, Sprite {
         g.addCollidable(this);
     }
 
+    /**
+     * sets the velocity of the paddle.
+     * @param v Velocity
+     */
     public void setVelocity(int v) {
-        this.velocity = new Velocity(v,0);
+        this.velocity = new Velocity(v, 0);
     }
 
+    /**
+     * sets the width of the paddle.
+     * @param w double
+     */
     public void setWidth(double w) {
         blockPaddle = new Block(STARTING_POSITION, w, Config.PADDLE_HEIGHT);
         blockPaddle.setColor(Color.orange);
         this.width = (int) w;
     }
 
+    /**
+     * return the width of the paddle.
+     * @return int
+     */
     public int getWidth() {
         return this.width;
     }

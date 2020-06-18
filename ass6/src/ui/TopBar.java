@@ -7,11 +7,20 @@ import scoresystem.ScoreIndicator;
 
 import java.awt.Color;
 
+/**
+ * Topbar class.
+ */
 public class TopBar implements Sprite {
     private ScoreIndicator scoreIndicator;
     private String levelName;
     private Counter lives;
 
+    /**
+     * constractor.
+     * @param si Scoreindicator
+     * @param levelName String
+     * @param lives Counter
+     */
     public TopBar(ScoreIndicator si, String levelName, Counter lives) {
         this.scoreIndicator = si;
         this.levelName = levelName;
@@ -28,7 +37,7 @@ public class TopBar implements Sprite {
         d.drawText(Config.SCORE_INDICATOR_WIDTH / 2 + 150, Config.SCORE_INDICATOR_HEIGHT / 2 + 5,
                 "Level Name: " + this.levelName , 16);
 
-        d.drawText(Config.SCORE_INDICATOR_WIDTH / 2 -250, Config.SCORE_INDICATOR_HEIGHT / 2 + 5,
+        d.drawText(Config.SCORE_INDICATOR_WIDTH / 2 - 250, Config.SCORE_INDICATOR_HEIGHT / 2 + 5,
                 "Lives: " + this.lives.getValue() , 16);
 
     }
