@@ -29,8 +29,30 @@ public class Ass6Game {
         List<LevelInformation> lvls = new ArrayList<>();
         GameFlow gameFlow = new GameFlow(animationRunner, gui.getKeyboardSensor());
 
-        System.out.println(args.length);
-        if (args.length == 0) {
+        if (args.length > 1) {
+            for (String c : args) {
+                switch (c) {
+                    case "1":
+                        lvls.add(new DirectHit());
+                        break;
+
+                    case "2":
+                        lvls.add(new WideEasy());
+                        break;
+
+                    case "3":
+                        lvls.add(new Green3());
+                        break;
+
+                    case "4":
+                        lvls.add(new FinalFour());
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        } else if(args.length >= 0) {
             lvls.add(new DirectHit());
             lvls.add(new WideEasy());
             lvls.add(new Green3());

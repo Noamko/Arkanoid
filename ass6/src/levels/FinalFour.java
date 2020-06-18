@@ -86,7 +86,7 @@ public class FinalFour implements LevelInformation {
         Ball b3 = new Ball(Config.BALL_STARTING_POSITION,Config.BALL_RADIUS,gl.getEnvironment());
         b1.setVelocity(Velocity.fromAngleAndSpeed(0, Config.BALL_SPEED));
         b2.setVelocity(Velocity.fromAngleAndSpeed(10, Config.BALL_SPEED));
-        b3.setVelocity(Velocity.fromAngleAndSpeed(12, Config.BALL_SPEED));
+        b3.setVelocity(Velocity.fromAngleAndSpeed(15, Config.BALL_SPEED));
         b1.addToGame(gl);
         b2.addToGame(gl);
         b3.addToGame(gl);

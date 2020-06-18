@@ -135,7 +135,7 @@ public class GameLevel implements Animation {
      */
     public void run() {
         this.running = true;
-        this.runner.run(new CountdownAnimation(0,5,sprites));
+        this.runner.run(new CountdownAnimation(3, sprites));
         this.runner.run(this);
     }
 
