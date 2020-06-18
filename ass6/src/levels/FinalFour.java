@@ -155,6 +155,13 @@ class FFBackground extends Background {
      * final fouar background.
      */
     public FFBackground() {
+        //Note about these magic numbers**///////////////////////////////////////////
+        //these numbers are just to place the sprite on the screen to create drawings
+        //put each one in a variable just so it wont be a "magic number is useless
+        //changing these values wont change the game play it will just change the background
+        //so i found it useless to change each background pixel values as below
+        //and store them in const variables
+        //HAPPY CHECKING :)
         addBlock(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, Color.decode("#009CF0"));
         for (int i = 0; i < 80; i += 10) {
             addLine(new Line(550 + i, 380 + i, 450 + i, 800 + i), Color.WHITE);

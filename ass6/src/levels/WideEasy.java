@@ -159,6 +159,13 @@ class WEBackground extends Background  {
      * final four background.
      */
     public WEBackground() {
+        //Note about these magic numbers**///////////////////////////////////////////
+        //these numbers are just to place the sprite on the screen to create drawings
+        //put each one in a variable just so it wont be a "magic number is useless
+        //changing these values wont change the game play it will just change the background
+        //so i found it useless to change each background pixel values as below
+        //and store them in const variables
+        //HAPPY CHECKING :)
         addBlock(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, Color.white);
         //Sun
         Point sunCenter = new Point(Config.WINDOW_WIDTH / 4, Config.WINDOW_HEIGHT / 4);
