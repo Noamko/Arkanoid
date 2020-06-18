@@ -31,9 +31,9 @@ public class Ass6Game {
 
         System.out.println(args.length);
         if (args.length == 0) {
-//            lvls.add(new DirectHit());
-//            lvls.add(new WideEasy());
-//            lvls.add(new Green3());
+            lvls.add(new DirectHit());
+            lvls.add(new WideEasy());
+            lvls.add(new Green3());
             lvls.add(new FinalFour());
         }
         gameFlow.runLevels(lvls);

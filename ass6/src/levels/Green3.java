@@ -106,7 +106,7 @@ public class Green3 implements LevelInformation {
 
 class G3Background extends Background {
     public G3Background() {
-        addBlock(new Point(0,0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, Color.decode("#009A47 "));
+        addBlock(new Point(0,0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, Color.decode("#009A47"));
 
         //Building
         int buildingheight = 260;
@@ -118,7 +118,7 @@ class G3Background extends Background {
         }
         //Antena
         addBlock(new Point(165,Config.WINDOW_HEIGHT - buildingheight - 60),30,60, ColorUIResource.gray);
-        addBlock(new Point(177,Config.WINDOW_HEIGHT - buildingheight - 180),5,12, ColorUIResource.gray);
+        addBlock(new Point(177,Config.WINDOW_HEIGHT - buildingheight - 180),5,120, ColorUIResource.gray);
         Point acenter = new Point(180,Config.WINDOW_HEIGHT - buildingheight - 180);
         addCircle(acenter, 10, Color.orange);
         addCircle(acenter, 5, Color.red);
