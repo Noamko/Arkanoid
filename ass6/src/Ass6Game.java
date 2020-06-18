@@ -5,6 +5,8 @@ import gamelogic.GameFlow;
 import gamelogic.GameLevel;
 import gamelogic.LevelInformation;
 import levels.DirectHit;
+import levels.FinalFour;
+import levels.Green3;
 import levels.WideEasy;
 
 import java.util.ArrayList;
@@ -25,10 +27,15 @@ public class Ass6Game {
         GUI gui = new GUI("Arkanoid", Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         AnimationRunner animationRunner = new AnimationRunner(gui, Config.FPS);
         List<LevelInformation> lvls = new ArrayList<>();
-        lvls.add(new DirectHit());
-        lvls.add((new WideEasy()));
-
         GameFlow gameFlow = new GameFlow(animationRunner, gui.getKeyboardSensor());
+
+        System.out.println(args.length);
+        if (args.length == 0) {
+//            lvls.add(new DirectHit());
+//            lvls.add(new WideEasy());
+//            lvls.add(new Green3());
+            lvls.add(new FinalFour());
+        }
         gameFlow.runLevels(lvls);
         gui.close();
     }

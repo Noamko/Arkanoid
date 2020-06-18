@@ -81,7 +81,7 @@ public class WideEasy implements LevelInformation {
                 blocks.add(b);
         }
 
-        for (int i = 0; i < numberOfBalls()+10; i++) {
+        for (int i = 0; i < numberOfBalls(); i++) {
             int relativeX = Config.WINDOW_WIDTH / 2;
             int relativeY = Config.WINDOW_HEIGHT / 2;
             if(i < 5) {
@@ -97,7 +97,7 @@ public class WideEasy implements LevelInformation {
                 b.addToGame(gl);
             }
         }
-        paddle.setWidth(400);
+        paddle.setWidth(600);
     }
 
     @Override
@@ -108,23 +108,14 @@ public class WideEasy implements LevelInformation {
 
 class WEBackground extends Background  {
     public WEBackground() {
-        Block back = new Block(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
-        back.setColor(Color.WHITE);
-        super.getSprites().add(back);
+        addBlock(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, Color.white);
         //Sun
         Point sunCenter = new Point(Config.WINDOW_WIDTH/4, Config.WINDOW_HEIGHT/4);
-        Circle sun = new Circle(sunCenter,90);
-        Circle inSun = new Circle(sunCenter, 80);
-        Circle inSun2 = new Circle(sunCenter,70);
-        inSun2.fillCircle(Color.YELLOW);
-        inSun.fillCircle(Color.orange);
-        sun.fillCircle(Color.getHSBColor(57,42,79));
         for (int i =1; i < 1000; i+=20) {
-            Stripe stripe = new Stripe(new Line(sunCenter,new Point(i,270)),Color.ORANGE);
-            super.getSprites().add(stripe);
+            addLine(new Line(sunCenter,new Point(i,270)),Color.ORANGE);
         }
-        super.getSprites().add(sun);
-        super.getSprites().add(inSun);
-        super.getSprites().add(inSun2);
+        addCircle(sunCenter, 90, Color.decode("#F4FFB9"));
+        addCircle(sunCenter, 80, Color.decode("#FFFF55"));
+        addCircle(sunCenter, 70, Color.decode("#FFD30A"));
     }
 }

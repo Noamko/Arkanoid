@@ -90,19 +90,11 @@ public class DirectHit implements LevelInformation {
 
 class DHBackground extends Background {
     public DHBackground (){
-        Stripe s1 = new Stripe(new Line(Config.WINDOW_WIDTH/2,50,Config.WINDOW_WIDTH/2,300), Color.BLUE);
-        Stripe s2 = new Stripe(new Line(250,175,550,175), Color.BLUE);
-        Block back = new Block(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
-        Circle outerCircle = new Circle(s1.getLine().middle(), 100);
-        outerCircle.setStroke(Color.BLUE);
-        Circle innerCircle = new Circle(s1.getLine().middle(), 50);
-        innerCircle.setStroke(Color.BLUE);
-        back.setColor(Color.BLACK);
-
-        super.getSprites().add(back);
-        super.getSprites().add(s1);
-        super.getSprites().add(s2);
-        super.getSprites().add(outerCircle);
-        super.getSprites().add(innerCircle);
+        Line l = new Line(Config.WINDOW_WIDTH/2,50,Config.WINDOW_WIDTH/2,300);
+        addBlock(new Point(0, 0), Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, Color.black);
+        addLine(l, Color.BLUE);
+        addLine(new Line(250,175,550,175), Color.BLUE);
+        addCircle(l.middle(), 100, Color.BLUE, true);
+        addCircle(l.middle(), 50, Color.BLUE, true);
     }
 }

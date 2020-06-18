@@ -9,7 +9,6 @@ public class AnimationRunner {
     private GUI gui;
     private int framesPerSecond;
     Sleeper sleeper = new Sleeper();
-    // ...
 
     public AnimationRunner(GUI gui, int fps) {
         this.framesPerSecond = fps;

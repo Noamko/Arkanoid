@@ -142,7 +142,7 @@ public class GameLevel implements Animation {
     public void doOneFrame(DrawSurface d) {
 
         if (this.keyboard.isPressed("p")) {
-            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY, new PauseScreen()));
+            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, "space", new PauseScreen()));
         }
 
         else if(this.keyboard.isPressed("left")){
