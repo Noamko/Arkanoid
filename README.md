@@ -1,2 +1,1 @@
-# Greetings!
-Welcome to my homework repo
+# Java Arkanoid game!
